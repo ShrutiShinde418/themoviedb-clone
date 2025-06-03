@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   const footerOptions1 = [
     { id: 1, title: "About TMDB" },

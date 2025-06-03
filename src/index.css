@@ -18,6 +18,7 @@ body {
   --color-teal: #16a085;
   --color-blue-1: #2980b9;
   --color-grey: #dee2e6;
+  --color-grey-1: #bebebe;
 }
 
 .text-gradient {
@@ -26,6 +27,20 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.text-gradient-1 {
+  background: var(--gradient-2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .gradient {
   background: var(--gradient-1);
+}
+
+.carousel__title {
+  @apply font-semibold text-2xl;
+}
+
+.tabs-indicator {
+  @apply absolute rounded-4xl -z-10 left-0 top-0 h-7 transition-all duration-150;
 }

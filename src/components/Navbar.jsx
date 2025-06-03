@@ -99,7 +99,13 @@ const Navbar = () => {
           return (
             <li key={item.id} className="group">
               <a href="#">{item.title}</a>
-              <Menu subMenuItems={item.subMenuItems} />
+              <Menu
+                subMenuItems={item.subMenuItems}
+                classNames="group-hover:opacity-100"
+                menuItemClassNames="hover:bg-grey ps-3 pe-14 py-1"
+                subMenuStyles="flex"
+                listStyles=""
+              />
             </li>
           );
         })}
