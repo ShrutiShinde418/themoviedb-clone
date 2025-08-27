@@ -14,6 +14,36 @@ export const trendingCarouselButtons = [
   },
 ];
 
+export const popularCarouselButtons = [
+  {
+    id: 1,
+    name: "Streaming",
+  },
+  {
+    id: 2,
+    name: "On TV",
+  },
+  {
+    id: 3,
+    name: "For Rent",
+  },
+  {
+    id: 4,
+    name: "In Theaters",
+  },
+];
+
+export const freeToWatchCarouselButtons = [
+  {
+    id: 1,
+    name: "Movies",
+  },
+  {
+    id: 2,
+    name: "TV",
+  },
+];
+
 export const subMenuItems = [
   {
     id: 1,
@@ -62,4 +92,9 @@ export const formattedDate = (date) => {
     0,
     3
   )} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+};
+
+export const tabMappers = {
+  Today: "day",
+  "This Week": "week",
 };

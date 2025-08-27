@@ -5,10 +5,10 @@ import { fetchTrendingMediaData } from "../services/api";
 import { ToastContainer, toast } from "react-toastify";
 import { formattedDate } from "../utils/helpers";
 
-const Carousel = ({ titleStyles, buttons, title }) => {
+const Carousel = ({ titleStyles, buttons, title, tabType, apiCallDetails }) => {
   const { data, error } = useQuery({
-    queryKey: ["trendingData"],
-    queryFn: () => fetchTrendingMediaData("day"),
+    queryKey: apiCallDetails.queryKey,
+    queryFn: apiCallDetails.queryFn,
   });
 
   if (error) {
@@ -22,13 +22,13 @@ const Carousel = ({ titleStyles, buttons, title }) => {
         <h1 className={`carousel__title ${titleStyles}`}>{title}</h1>
         <Tabs
           tabButtons={buttons}
-          activeId={1}
           tabsIndicatorStyles={"bg-dark-blue"}
           tabListStyles={"border-dark-blue"}
           tabButtonStyles={{
             inactiveTextColor: "text-black",
             activeTextColor: "text-gradient-1",
           }}
+          tabType={tabType}
         />
       </div>
       <div className="flex overflow-auto whitespace-nowrap">

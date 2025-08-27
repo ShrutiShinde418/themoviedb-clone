@@ -1,13 +1,17 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setActiveTab } from "../store/tabSlice";
 
 const Tabs = ({
   tabButtons,
-  activeId,
   tabListStyles,
   tabsIndicatorStyles,
   tabButtonStyles,
+  tabType,
 }) => {
-  const [activeTab, setActiveTab] = useState(activeId);
+  const dispatch = useDispatch();
+  const activeTab = useSelector((state) => state.tabs.tabBars[tabType]);
   const indicatorRef = useRef(null);
   const tabRefs = useRef([]);
 
@@ -33,14 +37,16 @@ const Tabs = ({
         return (
           <button
             key={tabButton.id}
-            ref={(el) => (tabRefs.current[tabButton.id] = el)}
-            id={tabButton.id}
-            aria-controls={tabButton.id}
-            aria-selected={tabButton.id === activeTab}
-            onClick={() => setActiveTab(tabButton.id)}
+            ref={(el) => (tabRefs.current[tabButton.name] = el)}
+            id={tabButton.name}
+            aria-controls={tabButton.name}
+            aria-selected={tabButton.name === activeTab}
+            onClick={() =>
+              dispatch(setActiveTab({ tabType, tabName: tabButton.name }))
+            }
             role="tab"
             className={`cursor-pointer ${
-              tabButton.id === activeTab
+              tabButton.name === activeTab
                 ? tabButtonStyles.activeTextColor
                 : tabButtonStyles.inactiveTextColor
             } py-0.5 px-3`}
