@@ -1,42 +1,18 @@
 import { SlOptions } from "react-icons/sl";
-import { FaList } from "react-icons/fa";
-import { MdOutlineFavorite } from "react-icons/md";
-import { FaBookmark } from "react-icons/fa6";
-import { IoStar } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import Menu from "./Menu";
+import { subMenuItems } from "../utils/helpers";
 import { useState } from "react";
 
-const Card = () => {
+const Card = ({ title, imgURL, releaseDate }) => {
   const [menuHandler, setMenuHandler] = useState(false);
 
   const showMenuHandler = () => {
     setMenuHandler((prevState) => !prevState);
   };
 
-  const subMenuItems = [
-    {
-      id: 1,
-      title: "Add to List",
-      icon: <FaList />,
-    },
-    {
-      id: 2,
-      title: "Favorite",
-      icon: <MdOutlineFavorite />,
-    },
-    {
-      id: 3,
-      title: "Watchlist",
-      icon: <FaBookmark />,
-    },
-    {
-      id: 4,
-      title: "Rating",
-      icon: <IoStar />,
-    },
-  ];
   return (
-    <div className="relative min-w-44 w-44 mx-5 mb-10">
+    <div className="relative min-w-44 w-44 mx-3 mb-10">
       <button
         className="options bg-white/30 backdrop-invert backdrop-opacity-40 w-fit p-1 absolute rounded-full right-2 top-2 cursor-pointer hover:bg-blue"
         onClick={showMenuHandler}
@@ -52,11 +28,16 @@ const Card = () => {
           listStyles="divide-y divide-gray-300"
         />
       )}
-      <img
-        src="http://image.tmdb.org/t/p/original/7MrgIUeq0DD2iF7GR6wqJfYZNeC.jpg"
-        alt="Anora"
-        className="rounded-md w-full"
-      />
+      <img src={imgURL} alt={title} className="rounded-md w-full" />
+      <div className="ml-3 mt-3 flex flex-col flex-wrap">
+        <Link
+          to={"/"}
+          className="font-semibold hover:text-blue wrap-break-word"
+        >
+          {title}
+        </Link>
+        <h3 className="text-grey-2">{releaseDate}</h3>
+      </div>
     </div>
   );
 };

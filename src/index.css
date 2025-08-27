@@ -19,6 +19,7 @@ body {
   --color-blue-1: #2980b9;
   --color-grey: #dee2e6;
   --color-grey-1: #bebebe;
+  --color-grey-2: hsl(0, 0%, 42%);
 }
 
 .text-gradient {

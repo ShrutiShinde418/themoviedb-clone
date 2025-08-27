@@ -12,7 +12,7 @@ const Menu = ({
       <ul className={`flex flex-col ${listStyles}`}>
         {subMenuItems.map((subMenuItem) => {
           return (
-            <li id={subMenuItem.id} className={`${menuItemClassNames}`}>
+            <li key={subMenuItem.id} className={`${menuItemClassNames}`}>
               <a href="#" className={subMenuStyles}>
                 {subMenuItem.icon}
                 {subMenuItem.title}
