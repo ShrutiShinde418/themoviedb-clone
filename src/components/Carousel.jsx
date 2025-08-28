@@ -1,7 +1,6 @@
 import Card from "./Card";
 import Tabs from "./Tabs";
 import { useQuery } from "@tanstack/react-query";
-import { fetchTrendingMediaData } from "../services/api";
 import { ToastContainer, toast } from "react-toastify";
 import { formattedDate } from "../utils/helpers";
 
@@ -18,7 +17,7 @@ const Carousel = ({ titleStyles, buttons, title, tabType, apiCallDetails }) => {
   return (
     <>
       <ToastContainer />
-      <div className="flex mb-7 mx-5 gap-4 items-center">
+      <div className="flex my-7 mx-5 gap-4 items-center">
         <h1 className={`carousel__title ${titleStyles}`}>{title}</h1>
         <Tabs
           tabButtons={buttons}

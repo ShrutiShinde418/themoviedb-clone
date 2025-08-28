@@ -4,7 +4,7 @@ const initialState = {
   tabBars: {
     trendingTab: "Today",
     popularTab: "Streaming",
-    freeToWatchTab: "Movies",
+    topRatedTab: "Movies",
   },
 };
 

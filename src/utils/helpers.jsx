@@ -2,6 +2,7 @@ import { FaList } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
 import { FaBookmark } from "react-icons/fa6";
 import { IoStar } from "react-icons/io5";
+import { format } from "date-fns";
 
 export const trendingCarouselButtons = [
   {
@@ -33,7 +34,7 @@ export const popularCarouselButtons = [
   },
 ];
 
-export const freeToWatchCarouselButtons = [
+export const topRatedCarouselButtons = [
   {
     id: 1,
     name: "Movies",
@@ -67,34 +68,34 @@ export const subMenuItems = [
   },
 ];
 
-export const getMonthName = (monthNumber) => {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  return months[monthNumber];
-};
-
 export const formattedDate = (date) => {
-  const dateObj = new Date(date);
-
-  return `${getMonthName(dateObj.getMonth()).slice(
-    0,
-    3
-  )} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+  return format(new Date(date), "MMM d, y");
 };
 
 export const tabMappers = {
   Today: "day",
   "This Week": "week",
+  Streaming: [
+    "movie",
+    ["sort_by=popularity.desc", "with_watch_providers=8", "watch_region=IN"],
+  ],
+  "On TV": [
+    "tv",
+    [
+      "sort_by=popularity.desc",
+      "air_date.gte=2025-08-01",
+      `air_date.lte=2025-08-27`,
+    ],
+  ],
+  "For Rent": ["movie", ["sort_by=popularity.desc", "with_release_type=4"]],
+  "In Theaters": [
+    "movie",
+    [
+      "sort_by=popularity.desc",
+      "with_release_type=3",
+      "release_date.gte=2025-08-01",
+    ],
+  ],
+  Movies: "movie",
+  TV: "tv",
 };
