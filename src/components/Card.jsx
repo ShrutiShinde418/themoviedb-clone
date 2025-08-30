@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { SlOptions } from "react-icons/sl";
 import { Link } from "react-router-dom";
-import Menu from "./Menu";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { subMenuItems } from "../utils/helpers";
-import { useState } from "react";
+import Menu from "./Menu";
+import "react-circular-progressbar/dist/styles.css";
 
-const Card = ({ title, imgURL, releaseDate }) => {
+const Card = ({ title, imgURL, releaseDate, rating }) => {
   const [menuHandler, setMenuHandler] = useState(false);
 
   const showMenuHandler = () => {
@@ -19,6 +21,17 @@ const Card = ({ title, imgURL, releaseDate }) => {
       >
         <SlOptions className="bg-transparent" />
       </button>
+      <div className="size-10 absolute top-[14.75rem] left-3">
+        <CircularProgressbarWithChildren
+          value={rating}
+          className="bg-progress-bg rounded-full p-0.5 font-display"
+          strokeWidth={6}
+        >
+          <div className="flex items-baseline text-white">
+            <strong className="text-sm after:content-['%']">{rating}</strong>
+          </div>
+        </CircularProgressbarWithChildren>
+      </div>
       {menuHandler && (
         <Menu
           subMenuItems={subMenuItems}
@@ -28,8 +41,12 @@ const Card = ({ title, imgURL, releaseDate }) => {
           listStyles="divide-y divide-gray-300"
         />
       )}
-      <img src={imgURL} alt={title} className="rounded-md w-full" />
-      <div className="ml-3 mt-3 flex flex-col flex-wrap text-wrap">
+      <img
+        src={imgURL}
+        alt={title}
+        className="rounded-md w-full h-64 object-cover"
+      />
+      <div className="ml-3 mt-6 flex flex-col flex-wrap text-wrap">
         <Link to={"/"} className="font-semibold hover:text-blue">
           {title}
         </Link>

@@ -40,6 +40,7 @@ const Carousel = ({ titleStyles, buttons, title, tabType, apiCallDetails }) => {
               releaseDate={formattedDate(
                 item.release_date || item.first_air_date
               )}
+              rating={Math.round(item.vote_average * 10)}
             />
           ))}
       </div>

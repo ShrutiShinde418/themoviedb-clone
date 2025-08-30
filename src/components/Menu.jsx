@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Menu = ({
   subMenuItems,
   classNames,
@@ -13,10 +15,10 @@ const Menu = ({
         {subMenuItems.map((subMenuItem) => {
           return (
             <li key={subMenuItem.id} className={`${menuItemClassNames}`}>
-              <a href="#" className={subMenuStyles}>
+              <Link to={subMenuItem.path} className={subMenuStyles}>
                 {subMenuItem.icon}
                 {subMenuItem.title}
-              </a>
+              </Link>
             </li>
           );
         })}

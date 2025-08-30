@@ -10,18 +10,22 @@ const Navbar = () => {
         {
           id: 1,
           title: "Popular",
+          path: "/popular/movies",
         },
         {
           id: 2,
           title: "Now Playing",
+          path: "/now/playing",
         },
         {
           id: 3,
           title: "Upcoming",
+          path: "/upcoming",
         },
         {
           id: 4,
           title: "Top Rated",
+          path: "/top/rated/movies",
         },
       ],
     },
@@ -32,18 +36,22 @@ const Navbar = () => {
         {
           id: 1,
           title: "Popular",
+          path: "/popular/tv",
         },
         {
           id: 2,
           title: "Airing Today",
+          path: "/airing/tv",
         },
         {
           id: 3,
           title: "On TV",
+          path: "/on/tv",
         },
         {
           id: 4,
           title: "Top Rated",
+          path: "/top/rated/tv",
         },
       ],
     },
@@ -54,6 +62,7 @@ const Navbar = () => {
         {
           id: 1,
           title: "Popular People",
+          path: "/popular/people",
         },
       ],
     },
@@ -64,10 +73,12 @@ const Navbar = () => {
         {
           id: 1,
           title: "Discussions",
+          path: "/discussions",
         },
         {
           id: 2,
           title: "LeaderBoard",
+          path: "/leaderboard",
         },
       ],
     },

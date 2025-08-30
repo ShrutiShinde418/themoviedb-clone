@@ -37,10 +37,26 @@ export const fetchWhatsPopularData = async (medium, filters) => {
 };
 
 export const fetchTopRatedData = async (medium) => {
-  console.log(medium);
   try {
     const { data } = await axios.get(
       `http://api.themoviedb.org/3/${medium}/top_rated`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    return data?.results;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const fetchPopularPeople = async (page = 1) => {
+  try {
+    const { data } = await axios.get(
+      `http://api.themoviedb.org/3/person/popular?page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
