@@ -3,6 +3,108 @@ import { MdOutlineFavorite } from "react-icons/md";
 import { FaBookmark } from "react-icons/fa6";
 import { IoStar } from "react-icons/io5";
 import { format } from "date-fns";
+import { FaPlus, FaSearch } from "react-icons/fa";
+
+export const navOptions = [
+  {
+    id: 1,
+    title: <FaPlus />,
+  },
+  {
+    id: 2,
+    title: "Login",
+  },
+  {
+    id: 3,
+    title: "Join TMDB",
+  },
+  {
+    id: 4,
+    title: <FaSearch className="text-blue" />,
+  },
+];
+
+export const navbarOptions = [
+  {
+    id: 1,
+    title: "Movies",
+    subMenuItems: [
+      {
+        id: 1,
+        title: "Popular",
+        path: "/popular/movies",
+      },
+      {
+        id: 2,
+        title: "Now Playing",
+        path: "/now/playing",
+      },
+      {
+        id: 3,
+        title: "Upcoming",
+        path: "/upcoming",
+      },
+      {
+        id: 4,
+        title: "Top Rated",
+        path: "/top/rated/movies",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "TV Shows",
+    subMenuItems: [
+      {
+        id: 1,
+        title: "Popular",
+        path: "/popular/tv",
+      },
+      {
+        id: 2,
+        title: "Airing Today",
+        path: "/airing/tv",
+      },
+      {
+        id: 3,
+        title: "On TV",
+        path: "/on/tv",
+      },
+      {
+        id: 4,
+        title: "Top Rated",
+        path: "/top/rated/tv",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "People",
+    subMenuItems: [
+      {
+        id: 1,
+        title: "Popular People",
+        path: "/popular/people",
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "More",
+    subMenuItems: [
+      {
+        id: 1,
+        title: "Discussions",
+        path: "/discussions",
+      },
+      {
+        id: 2,
+        title: "LeaderBoard",
+        path: "/leaderboard",
+      },
+    ],
+  },
+];
 
 export const trendingCarouselButtons = [
   {

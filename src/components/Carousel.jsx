@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "./cards/Card";
 import Tabs from "./Tabs";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
@@ -32,7 +32,7 @@ const Carousel = ({ titleStyles, buttons, title, tabType, apiCallDetails }) => {
       </div>
       <div className="flex overflow-auto whitespace-nowrap">
         {data?.length > 0 &&
-          data.map((item) => (
+          data?.map((item) => (
             <Card
               key={item.id}
               imgURL={`http://image.tmdb.org/t/p/w200/${item.poster_path}`}
@@ -41,6 +41,8 @@ const Carousel = ({ titleStyles, buttons, title, tabType, apiCallDetails }) => {
                 item.release_date || item.first_air_date
               )}
               rating={Math.round(item.vote_average * 10)}
+              cardStyles=""
+              imgStyles={"rounded-md"}
             />
           ))}
       </div>

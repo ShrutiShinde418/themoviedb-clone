@@ -53,10 +53,10 @@ export const fetchTopRatedData = async (medium) => {
   }
 };
 
-export const fetchPopularPeople = async (page = 1) => {
+export const fetchPopularData = async (param, page = 1) => {
   try {
     const { data } = await axios.get(
-      `http://api.themoviedb.org/3/person/popular?page=${page}`,
+      `http://api.themoviedb.org/3/${param}/popular?page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
