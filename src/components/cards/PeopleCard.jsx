@@ -1,6 +1,18 @@
-const PeopleCard = ({ profilePath, name, knownForTitles }) => {
+import { Link } from "react-router-dom";
+
+const PeopleCard = ({
+  profilePath,
+  name,
+  knownForTitles,
+  id,
+  knownForItems,
+}) => {
   return (
-    <div className="shadow-md rounded-t-md flex flex-col mt-1">
+    <Link
+      to={`/person/${id}`}
+      state={knownForItems}
+      className="shadow-md rounded-t-md flex flex-col mt-1"
+    >
       <img
         src={`http://image.tmdb.org/t/p/w200/${profilePath}`}
         alt={name}
@@ -10,7 +22,7 @@ const PeopleCard = ({ profilePath, name, knownForTitles }) => {
         <h3 className="font-semibold text-lg leading-5.5">{name}</h3>
         <p className="text-grey-2 leading-4.5 text-sm">{knownForTitles}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

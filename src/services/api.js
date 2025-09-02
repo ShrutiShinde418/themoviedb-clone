@@ -15,7 +15,7 @@ export const fetchTrendingMediaData = async (timeDuration) => {
 
     return data?.results;
   } catch (error) {
-    return error.message;
+    throw error;
   }
 };
 
@@ -32,7 +32,7 @@ export const fetchWhatsPopularData = async (medium, filters) => {
 
     return data?.results;
   } catch (error) {
-    return error.message;
+    throw error;
   }
 };
 
@@ -49,7 +49,7 @@ export const fetchTopRatedData = async (medium) => {
 
     return data?.results;
   } catch (error) {
-    return error.message;
+    throw error;
   }
 };
 
@@ -66,6 +66,40 @@ export const fetchPopularData = async (param, page = 1) => {
 
     return data?.results;
   } catch (error) {
-    return error.message;
+    throw error;
+  }
+};
+
+export const fetchPersonDetails = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `http://api.themoviedb.org/3/person/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchPersonProfiles = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `http://api.themoviedb.org/3/person/${id}/external_ids`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    return data;
+  } catch (error) {
+    throw error;
   }
 };

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Card from "./cards/Card";
 import Tabs from "./Tabs";
 import { useQuery } from "@tanstack/react-query";
@@ -10,9 +11,13 @@ const Carousel = ({ titleStyles, buttons, title, tabType, apiCallDetails }) => {
     queryFn: apiCallDetails.queryFn,
   });
 
-  if (error) {
-    return toast.error(`${error}`);
-  }
+  useEffect(() => {
+    if (error) {
+      toast.error(`${error.message}`);
+    }
+
+    return () => toast.dismiss();
+  }, [error]);
 
   return (
     <>
@@ -31,7 +36,8 @@ const Carousel = ({ titleStyles, buttons, title, tabType, apiCallDetails }) => {
         />
       </div>
       <div className="flex overflow-auto whitespace-nowrap">
-        {data?.length > 0 &&
+        {!error &&
+          data?.length > 0 &&
           data?.map((item) => (
             <Card
               key={item.id}

@@ -201,3 +201,14 @@ export const tabMappers = {
   Movies: "movie",
   TV: "tv",
 };
+
+export const sortOptions = [
+  { value: "popularity-descending", label: "Popularity Descending" },
+  { value: "popularity-ascending", label: "Popularity Ascending" },
+  { value: "rating-descending", label: "Rating Descending" },
+  { value: "rating-ascending", label: "Rating Ascending" },
+  { value: "release-descending", label: "Release Descending" },
+  { value: "release-ascending", label: "Release Ascending" },
+  { value: "title-descending", label: "Title (Z-A)" },
+  { value: "title-ascending", label: "Title (A-Z)" },
+];

@@ -6,6 +6,7 @@ import Fallback from "./components/Fallback";
 import MainPage from "./pages/MainPage";
 import PopularPeople from "./pages/PopularPeople";
 import PopularMovies from "./pages/PopularMovies";
+import PersonPage from "./pages/PersonPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/popular/people" element={<PopularPeople />} />
           <Route path="/popular/movies" element={<PopularMovies />} />
+          <Route path="/person/:id" element={<PersonPage />} />
         </Routes>
         <Footer />
       </ErrorBoundary>
