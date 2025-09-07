@@ -5,7 +5,7 @@ const apiKey = import.meta.env.VITE_API_READ_ACCESS_TOKEN;
 export const fetchTrendingMediaData = async (timeDuration) => {
   try {
     const { data } = await axios.get(
-      `http://api.themoviedb.org/3/trending/all/${timeDuration}?region=IN`,
+      `https://api.themoviedb.org/3/trending/all/${timeDuration}?region=IN`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -22,7 +22,7 @@ export const fetchTrendingMediaData = async (timeDuration) => {
 export const fetchWhatsPopularData = async (medium, filters) => {
   try {
     const { data } = await axios.get(
-      `http://api.themoviedb.org/3/discover/${medium}?${filters.join("&")}`,
+      `https://api.themoviedb.org/3/discover/${medium}?${filters.join("&")}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -39,7 +39,7 @@ export const fetchWhatsPopularData = async (medium, filters) => {
 export const fetchTopRatedData = async (medium) => {
   try {
     const { data } = await axios.get(
-      `http://api.themoviedb.org/3/${medium}/top_rated`,
+      `https://api.themoviedb.org/3/${medium}/top_rated`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -56,7 +56,24 @@ export const fetchTopRatedData = async (medium) => {
 export const fetchPopularData = async (param, page = 1) => {
   try {
     const { data } = await axios.get(
-      `http://api.themoviedb.org/3/${param}/popular?page=${page}`,
+      `https://api.themoviedb.org/3/${param}/popular?page=${page}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    return data?.results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchMovieData = async (param, page = 1) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${param}?page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -73,7 +90,7 @@ export const fetchPopularData = async (param, page = 1) => {
 export const fetchPersonDetails = async (id) => {
   try {
     const { data } = await axios.get(
-      `http://api.themoviedb.org/3/person/${id}`,
+      `https://api.themoviedb.org/3/person/${id}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -90,7 +107,24 @@ export const fetchPersonDetails = async (id) => {
 export const fetchPersonProfiles = async (id) => {
   try {
     const { data } = await axios.get(
-      `http://api.themoviedb.org/3/person/${id}/external_ids`,
+      `https://api.themoviedb.org/3/person/${id}/external_ids`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchCombinedCredits = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/person/${id}/combined_credits`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,

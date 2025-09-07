@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchPopularData } from "../services/api";
 import Card from "../components/cards/Card";
 import { formattedDate } from "../utils/helpers";
 import Filter from "../components/Filter";
 import { ToastContainer, toast } from "react-toastify";
 
-const PopularMovies = () => {
+const MovieOrTVPage = ({ queryKey, queryFunction, title }) => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["popularMovies"],
-    queryFn: () => fetchPopularData("movie", 1),
+    queryKey: [queryKey],
+    queryFn: () => queryFunction(),
   });
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const PopularMovies = () => {
   return (
     <div className="mx-4 mb-10">
       <ToastContainer />
-      <h2 className="font-semibold text-[1.75rem] my-5 mx-3">Popular Movies</h2>
+      <h2 className="font-semibold text-[1.75rem] my-5 mx-3">{title}</h2>
       {isLoading && <p>Loading...</p>}
       <div className="flex">
         <Filter />
@@ -48,4 +47,4 @@ const PopularMovies = () => {
   );
 };
 
-export default PopularMovies;
+export default MovieOrTVPage;

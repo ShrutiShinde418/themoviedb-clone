@@ -4,7 +4,11 @@ import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { BsFacebook } from "react-icons/bs";
 import { FaTwitter, FaInstagram } from "react-icons/fa";
-import { fetchPersonDetails, fetchPersonProfiles } from "../services/api";
+import {
+  fetchCombinedCredits,
+  fetchPersonDetails,
+  fetchPersonProfiles,
+} from "../services/api";
 
 const PersonPage = () => {
   const { id } = useParams();
@@ -21,20 +25,34 @@ const PersonPage = () => {
         queryFn: () => fetchPersonProfiles(id),
         enabled: !!id,
       },
+      {
+        queryKey: ["personCombinedCredits", id],
+        queryFn: () => fetchCombinedCredits(id),
+        enabled: !!id,
+      },
     ],
   });
 
-  const [detailsQuery, profilesQuery] = results;
+  const [detailsQuery, profilesQuery, creditsQuery] = results;
+
+  const sortedResult = creditsQuery?.data?.cast.sort((a, b) => {
+    const date1 = new Date(a.release_date || a.first_air_date);
+    const date2 = new Date(b.release_date || b.first_air_date);
+
+    return date2 > date1 ? 1 : -1;
+  });
+
+  console.log(sortedResult);
 
   useEffect(() => {
-    if (detailsQuery.error || profilesQuery.error) {
+    if (detailsQuery.error || profilesQuery.error || creditsQuery.error) {
       toast.error(
         `${detailsQuery?.error?.message || profilesQuery?.error?.message}`
       );
     }
 
     return () => toast.dismiss();
-  }, [detailsQuery.error, profilesQuery.error]);
+  }, [detailsQuery.error, profilesQuery.error, creditsQuery.error]);
 
   return (
     <div className="m-8">
@@ -110,6 +128,35 @@ const PersonPage = () => {
           <div className="flex flex-col">
             <h6 className="font-semibold text-2xl mb-3">Biography</h6>
             <p>{detailsQuery?.data?.biography}</p>
+          </div>
+          <div className="mt-4">
+            <h6 className="font-semibold text-2xl mb-3">Known For</h6>
+          </div>
+          <div>
+            <h6 className="font-semibold text-2xl mb-3">Acting</h6>
+          </div>
+          <div className="shadow-md p-5">
+            <div className="flex gap-5 items-center">
+              <p>
+                {sortedResult &&
+                  (sortedResult[0]?.release_date ||
+                    sortedResult[0]?.first_air_date) &&
+                  new Date(
+                    sortedResult[0]?.release_date ||
+                      sortedResult[0]?.first_air_date
+                  )?.getFullYear()}
+              </p>
+              <div>
+                <input
+                  type="radio"
+                  name={sortedResult[0]?.original_title}
+                  id={sortedResult[0]?.original_title}
+                />
+              </div>
+              <div>
+                <p>{sortedResult[0]?.original_title}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
