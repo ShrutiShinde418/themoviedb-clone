@@ -3,7 +3,7 @@ import { SlOptions } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { subMenuItems } from "../../utils/helpers";
-import Menu from "../Menu";
+import Menu from "../menu/Menu";
 import "react-circular-progressbar/dist/styles.css";
 
 const Card = ({

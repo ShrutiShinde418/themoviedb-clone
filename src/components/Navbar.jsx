@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Menu from "./Menu";
+import Menu from "./menu/Menu";
 import { navOptions, navbarOptions } from "../utils/helpers";
 
 const Navbar = () => {

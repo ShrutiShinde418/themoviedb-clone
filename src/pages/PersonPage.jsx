@@ -47,7 +47,7 @@ const PersonPage = () => {
   useEffect(() => {
     if (detailsQuery.error || profilesQuery.error || creditsQuery.error) {
       toast.error(
-        `${detailsQuery?.error?.message || profilesQuery?.error?.message}`
+        `${detailsQuery?.error?.message || profilesQuery?.error?.message}`,
       );
     }
 
@@ -57,6 +57,9 @@ const PersonPage = () => {
   return (
     <div className="m-8">
       <ToastContainer />
+      {(detailsQuery.isLoading ||
+        profilesQuery.isLoading ||
+        creditsQuery.isLoading) && <p>Loading...</p>}
       <div className="grid grid-cols-4 gap-8">
         <div className="flex flex-col">
           <img
@@ -106,20 +109,26 @@ const PersonPage = () => {
             <h4 className="font-semibold">Gender</h4>
             <p></p>
           </div>
-          <div className="flex flex-col gap-1 mb-3">
-            <h4 className="font-semibold">Birthday</h4>
-            <p>{detailsQuery?.data?.birthday}</p>
-          </div>
-          <div className="flex flex-col gap-1 mb-3">
-            <h4 className="font-semibold">Place of Birth</h4>
-            <p>{detailsQuery?.data?.place_of_birth}</p>
-          </div>
-          <div className="flex flex-col gap-1 mb-3">
-            <h4 className="font-semibold">Also Known As</h4>
-            {detailsQuery?.data?.also_known_as.map((item) => (
-              <p>{item}</p>
-            ))}
-          </div>
+          {detailsQuery?.data?.birthday && (
+            <div className="flex flex-col gap-1 mb-3">
+              <h4 className="font-semibold">Birthday</h4>
+              <p>{detailsQuery.data.birthday}</p>
+            </div>
+          )}
+          {detailsQuery?.data?.place_of_birth && (
+            <div className="flex flex-col gap-1 mb-3">
+              <h4 className="font-semibold">Place of Birth</h4>
+              <p>{detailsQuery.data.place_of_birth}</p>
+            </div>
+          )}
+          {detailsQuery?.data?.also_known_as && (
+            <div className="flex flex-col gap-1 mb-3">
+              <h4 className="font-semibold">Also Known As</h4>
+              {detailsQuery?.data?.also_known_as.map((item) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          )}
         </div>
         <div className="col-span-3">
           <h5 className="text-4xl font-bold mb-6">
@@ -127,7 +136,11 @@ const PersonPage = () => {
           </h5>
           <div className="flex flex-col">
             <h6 className="font-semibold text-2xl mb-3">Biography</h6>
-            <p>{detailsQuery?.data?.biography}</p>
+            <p>
+              {detailsQuery?.data?.biography
+                ? detailsQuery?.data?.biography
+                : `We don't have a biography for ${detailsQuery?.data?.name}.`}
+            </p>
           </div>
           <div className="mt-4">
             <h6 className="font-semibold text-2xl mb-3">Known For</h6>
@@ -139,22 +152,22 @@ const PersonPage = () => {
             <div className="flex gap-5 items-center">
               <p>
                 {sortedResult &&
-                  (sortedResult[0]?.release_date ||
-                    sortedResult[0]?.first_air_date) &&
+                  (sortedResult?.[0]?.release_date ||
+                    sortedResult?.[0]?.first_air_date) &&
                   new Date(
-                    sortedResult[0]?.release_date ||
-                      sortedResult[0]?.first_air_date
+                    sortedResult?.[0]?.release_date ||
+                      sortedResult?.[0]?.first_air_date,
                   )?.getFullYear()}
               </p>
               <div>
                 <input
                   type="radio"
-                  name={sortedResult[0]?.original_title}
-                  id={sortedResult[0]?.original_title}
+                  name={sortedResult?.[0]?.original_title}
+                  id={sortedResult?.[0]?.original_title}
                 />
               </div>
               <div>
-                <p>{sortedResult[0]?.original_title}</p>
+                <p>{sortedResult?.[0]?.original_title}</p>
               </div>
             </div>
           </div>

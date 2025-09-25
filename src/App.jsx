@@ -8,9 +8,9 @@ import PopularPeople from "./pages/PopularPeople";
 import PersonPage from "./pages/PersonPage";
 import MovieOrTVPage from "./pages/MovieOrTVPage";
 import {
-  fetchMovieData,
   fetchPopularData,
   fetchTopRatedData,
+  fetchMovieOrTVData,
 } from "./services/api";
 
 function App() {
@@ -36,7 +36,9 @@ function App() {
             element={
               <MovieOrTVPage
                 queryKey={"nowPlayingMovies"}
-                queryFunction={() => fetchMovieData("now_playing", 1)}
+                queryFunction={() =>
+                  fetchMovieOrTVData("movie", "now_playing", 1)
+                }
                 title={"Now Playing"}
               />
             }
@@ -46,7 +48,7 @@ function App() {
             element={
               <MovieOrTVPage
                 queryKey={"upcomingMovies"}
-                queryFunction={() => fetchMovieData("upcoming", 1)}
+                queryFunction={() => fetchMovieOrTVData("movie", "upcoming", 1)}
                 title={"Upcoming"}
               />
             }
@@ -58,6 +60,48 @@ function App() {
                 queryKey={"upcomingMovies"}
                 queryFunction={() => fetchTopRatedData("movie")}
                 title={"Upcoming"}
+              />
+            }
+          />
+          <Route
+            path="/popular/tv"
+            element={
+              <MovieOrTVPage
+                queryFunction={() => fetchPopularData("tv", 1)}
+                queryKey={"popularTVShows"}
+                title={"Popular TV Shows"}
+              />
+            }
+          />
+          <Route
+            path="/airing/tv"
+            element={
+              <MovieOrTVPage
+                queryFunction={() =>
+                  fetchMovieOrTVData("tv", "airing_today", 1)
+                }
+                queryKey={"TVShowsAiring"}
+                title={"TV Shows Airing Today"}
+              />
+            }
+          />
+          <Route
+            path="/on/tv"
+            element={
+              <MovieOrTVPage
+                queryFunction={() => fetchMovieOrTVData("tv", "on_the_air", 1)}
+                queryKey={"onTheAir"}
+                title={"Currently Airing TV Shows"}
+              />
+            }
+          />
+          <Route
+            path="/top/rated/tv"
+            element={
+              <MovieOrTVPage
+                queryFunction={() => fetchTopRatedData("tv")}
+                queryKey={"topRatedTV"}
+                title={"Top Rated TV Shows"}
               />
             }
           />
