@@ -1,10 +1,30 @@
-import { genres, sortOptions } from "../utils/helpers";
+import { useState } from "react";
+import { certifications, genres, sortOptions } from "../utils/helpers";
 import FilterMenu from "./menu/FilterMenu";
 import Chip from "./Chip.jsx";
 
 const Filter = () => {
+  const [genreTypes, setGenreTypes] = useState(genres);
+  const [certificationTypes, setCertificationTypes] = useState(certifications);
+
+  const checkboxChangeHandler = (genreId, checked) => {
+    let updatedGenres = genres;
+    const selectedGenre = updatedGenres.find((genre) => genre.id === genreId);
+    selectedGenre.checked = checked;
+    setGenreTypes(updatedGenres);
+  };
+
+  const onChangeHandler = (certificationId, checked) => {
+    let updatedCertificationTypes = certificationTypes;
+    const selectedCertificationTypes = updatedCertificationTypes.find(
+      (certificationTypes) => certificationTypes.id === certificationId,
+    );
+    selectedCertificationTypes.checked = checked;
+    setCertificationTypes(updatedCertificationTypes);
+  };
+
   return (
-    <div className="w-9/12 flex flex-col gap-3">
+    <div className="w-full flex flex-col gap-3">
       <FilterMenu initialValue={true} title={"Sort"}>
         <div className="px-3 mt-2 pb-4">
           <p className="font-light text-lg mb-2">Sort Result By</p>
@@ -115,8 +135,25 @@ const Filter = () => {
       </FilterMenu>
       <FilterMenu initialValue={true} title={"Genres"}>
         <div className="flex flex-wrap gap-2 m-3">
-          {genres.map((item) => (
-            <Chip title={item.name} key={item.id} />
+          {genreTypes.map((item) => (
+            <Chip
+              title={item.name}
+              key={item.id}
+              id={item.id}
+              checkboxChangeHandler={checkboxChangeHandler}
+            />
+          ))}
+        </div>
+      </FilterMenu>
+      <FilterMenu initialValue={true} title={"Certification"}>
+        <div className="flex flex-wrap gap-2 m-3">
+          {certificationTypes.map((item) => (
+            <Chip
+              title={item.name}
+              key={item.id}
+              id={item.id}
+              checkboxChangeHandler={onChangeHandler}
+            />
           ))}
         </div>
       </FilterMenu>

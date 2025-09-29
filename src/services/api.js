@@ -28,9 +28,9 @@ export const fetchWhatsPopularData = async (medium, filters) => {
   return data?.results;
 };
 
-export const fetchTopRatedData = async (medium) => {
+export const fetchTopRatedData = async (medium, pageParam) => {
   const { data } = await axios.get(
-    `https://api.themoviedb.org/3/${medium}/top_rated`,
+    `https://api.themoviedb.org/3/${medium}/top_rated?page=${pageParam}`,
     {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -38,12 +38,15 @@ export const fetchTopRatedData = async (medium) => {
     },
   );
 
-  return data?.results;
+  return {
+    results: data?.results,
+    nextCursor: data?.page < data?.total_pages ? data.page + 1 : undefined,
+  };
 };
 
-export const fetchPopularData = async (param, page = 1) => {
+export const fetchPopularData = async (param, pageParam = 1) => {
   const { data } = await axios.get(
-    `https://api.themoviedb.org/3/${param}/popular?page=${page}`,
+    `https://api.themoviedb.org/3/${param}/popular?page=${pageParam}`,
     {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -51,12 +54,15 @@ export const fetchPopularData = async (param, page = 1) => {
     },
   );
 
-  return data?.results;
+  return {
+    results: data?.results,
+    nextCursor: data?.page < data?.total_pages ? data.page + 1 : undefined,
+  };
 };
 
-export const fetchMovieOrTVData = async (medium, param, page = 1) => {
+export const fetchMovieOrTVData = async (medium, param, pageParam = 1) => {
   const { data } = await axios.get(
-    `https://api.themoviedb.org/3/${medium}/${param}?page=${page}`,
+    `https://api.themoviedb.org/3/${medium}/${param}?page=${pageParam}`,
     {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -64,7 +70,10 @@ export const fetchMovieOrTVData = async (medium, param, page = 1) => {
     },
   );
 
-  return data?.results;
+  return {
+    results: data?.results || [],
+    nextCursor: data?.page < data?.total_pages ? data.page + 1 : undefined,
+  };
 };
 
 export const fetchPersonDetails = async (id) => {

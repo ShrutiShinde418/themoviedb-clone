@@ -171,6 +171,8 @@ export const subMenuItems = [
 ];
 
 export const formattedDate = (date) => {
+  if (!date) return "Unknown date";
+
   return format(new Date(date), "MMM d, y");
 };
 
@@ -217,61 +219,111 @@ export const genres = [
   {
     id: 1,
     name: "Action",
+    checked: false,
   },
   {
     id: 2,
     name: "Adventure",
+    checked: false,
   },
   {
     id: 3,
     name: "Animation",
+    checked: false,
   },
   {
     id: 4,
     name: "Comedy",
+    checked: false,
   },
   {
     id: 5,
     name: "Crime",
+    checked: false,
   },
   {
     id: 6,
     name: "Documentary",
+    checked: false,
   },
   {
     id: 7,
     name: "Drama",
+    checked: false,
   },
   {
     id: 8,
     name: "Family",
+    checked: false,
   },
   {
     id: 9,
     name: "Fantasy",
+    checked: false,
   },
   {
     id: 10,
     name: "History",
+    checked: false,
   },
   {
     id: 11,
     name: "Horror",
+    checked: false,
   },
   {
     id: 12,
     name: "Music",
+    checked: false,
   },
   {
     id: 13,
     name: "Mystery",
+    checked: false,
   },
   {
     id: 14,
     name: "Romance",
+    checked: false,
   },
   {
     id: 15,
     name: "Science Fiction",
+    checked: false,
+  },
+  {
+    id: 16,
+    name: "TV Movie",
+    checked: false,
+  },
+  {
+    id: 17,
+    name: "Thriller",
+    checked: false,
+  },
+  {
+    id: 18,
+    name: "War",
+    checked: false,
+  },
+  {
+    id: 19,
+    name: "Western",
+    checked: false,
+  },
+];
+
+export const certifications = [
+  {
+    id: 1,
+    name: "U",
+  },
+  {
+    id: 2,
+    name: "UA",
+  },
+  {
+    id: 3,
+    name: "A",
   },
 ];

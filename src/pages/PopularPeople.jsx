@@ -24,8 +24,8 @@ const PopularPeople = () => {
       <h2 className="font-bold text-2xl my-5">Popular People</h2>
       {isLoading && <p>Loading...</p>}
       <div className="grid grid-cols-4 gap-6">
-        {data?.length > 0 &&
-          data?.map((item) => {
+        {data?.results?.length > 0 &&
+          data?.results?.map((item) => {
             const knownForTitles = item.known_for
               .slice(0, 3)
               .map((entry) => entry.title || entry.name)

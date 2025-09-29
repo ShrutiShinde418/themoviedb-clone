@@ -25,7 +25,9 @@ function App() {
             path="/popular/movies"
             element={
               <MovieOrTVPage
-                queryFunction={() => fetchPopularData("movie", 1)}
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchPopularData("movie", pageParam)
+                }
                 queryKey={"popularMovies"}
                 title={"Popular Movies"}
               />
@@ -36,8 +38,8 @@ function App() {
             element={
               <MovieOrTVPage
                 queryKey={"nowPlayingMovies"}
-                queryFunction={() =>
-                  fetchMovieOrTVData("movie", "now_playing", 1)
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchMovieOrTVData("movie", "now_playing", pageParam)
                 }
                 title={"Now Playing"}
               />
@@ -48,7 +50,9 @@ function App() {
             element={
               <MovieOrTVPage
                 queryKey={"upcomingMovies"}
-                queryFunction={() => fetchMovieOrTVData("movie", "upcoming", 1)}
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchMovieOrTVData("movie", "upcoming", pageParam)
+                }
                 title={"Upcoming"}
               />
             }
@@ -58,7 +62,9 @@ function App() {
             element={
               <MovieOrTVPage
                 queryKey={"upcomingMovies"}
-                queryFunction={() => fetchTopRatedData("movie")}
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchTopRatedData("movie", pageParam)
+                }
                 title={"Upcoming"}
               />
             }
@@ -67,7 +73,9 @@ function App() {
             path="/popular/tv"
             element={
               <MovieOrTVPage
-                queryFunction={() => fetchPopularData("tv", 1)}
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchPopularData("tv", pageParam)
+                }
                 queryKey={"popularTVShows"}
                 title={"Popular TV Shows"}
               />
@@ -77,8 +85,8 @@ function App() {
             path="/airing/tv"
             element={
               <MovieOrTVPage
-                queryFunction={() =>
-                  fetchMovieOrTVData("tv", "airing_today", 1)
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchMovieOrTVData("tv", "airing_today", pageParam)
                 }
                 queryKey={"TVShowsAiring"}
                 title={"TV Shows Airing Today"}
@@ -89,7 +97,9 @@ function App() {
             path="/on/tv"
             element={
               <MovieOrTVPage
-                queryFunction={() => fetchMovieOrTVData("tv", "on_the_air", 1)}
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchMovieOrTVData("tv", "on_the_air", pageParam)
+                }
                 queryKey={"onTheAir"}
                 title={"Currently Airing TV Shows"}
               />
@@ -99,7 +109,9 @@ function App() {
             path="/top/rated/tv"
             element={
               <MovieOrTVPage
-                queryFunction={() => fetchTopRatedData("tv")}
+                queryFunction={({ pageParam = 1 }) =>
+                  fetchTopRatedData("tv", pageParam)
+                }
                 queryKey={"topRatedTV"}
                 title={"Top Rated TV Shows"}
               />

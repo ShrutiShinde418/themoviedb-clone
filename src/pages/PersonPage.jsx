@@ -9,6 +9,7 @@ import {
   fetchPersonDetails,
   fetchPersonProfiles,
 } from "../services/api";
+import Credit from "../components/Credit.jsx";
 
 const PersonPage = () => {
   const { id } = useParams();
@@ -35,14 +36,12 @@ const PersonPage = () => {
 
   const [detailsQuery, profilesQuery, creditsQuery] = results;
 
-  const sortedResult = creditsQuery?.data?.cast.sort((a, b) => {
-    const date1 = new Date(a.release_date || a.first_air_date);
-    const date2 = new Date(b.release_date || b.first_air_date);
+  const sortedResult = creditsQuery?.data?.cast?.sort((a, b) => {
+    const date1 = new Date(a.release_date || a.first_credit_air_date);
+    const date2 = new Date(b.release_date || b.first_credit_air_date);
 
-    return date2 > date1 ? 1 : -1;
+    return date1 > date2 ? -1 : 1;
   });
-
-  console.log(sortedResult);
 
   useEffect(() => {
     if (detailsQuery.error || profilesQuery.error || creditsQuery.error) {
@@ -124,8 +123,8 @@ const PersonPage = () => {
           {detailsQuery?.data?.also_known_as && (
             <div className="flex flex-col gap-1 mb-3">
               <h4 className="font-semibold">Also Known As</h4>
-              {detailsQuery?.data?.also_known_as.map((item) => (
-                <p>{item}</p>
+              {detailsQuery?.data?.also_known_as.map((item, index) => (
+                <p key={index}>{item}</p>
               ))}
             </div>
           )}
@@ -148,28 +147,16 @@ const PersonPage = () => {
           <div>
             <h6 className="font-semibold text-2xl mb-3">Acting</h6>
           </div>
-          <div className="shadow-md p-5">
-            <div className="flex gap-5 items-center">
-              <p>
-                {sortedResult &&
-                  (sortedResult?.[0]?.release_date ||
-                    sortedResult?.[0]?.first_air_date) &&
-                  new Date(
-                    sortedResult?.[0]?.release_date ||
-                      sortedResult?.[0]?.first_air_date,
-                  )?.getFullYear()}
-              </p>
-              <div>
-                <input
-                  type="radio"
-                  name={sortedResult?.[0]?.original_title}
-                  id={sortedResult?.[0]?.original_title}
-                />
-              </div>
-              <div>
-                <p>{sortedResult?.[0]?.original_title}</p>
-              </div>
-            </div>
+          <div className="shadow-md p-5 flex flex-col gap-5">
+            {sortedResult?.map((result) => (
+              <Credit
+                key={`${result.backdrop_path}_${result.credit_id}`}
+                character={result.character}
+                episodeCount={result.episode_count}
+                originalTitle={result.name || result.original_title}
+                releaseDate={result.release_date || result.first_air_date}
+              />
+            ))}
           </div>
         </div>
       </div>
